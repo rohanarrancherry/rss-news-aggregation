@@ -27,6 +27,14 @@ mongoose
 // setting the default api endpoint
 app.use('/api/news', routeForFeed);
 
+app.use(express.json())
+const editorRoutes = require('./editor/editorRequest')
+const channelRoutes = require('./channel/channelRequest')
+const filterRouters = require('./filter/filterRequest')
+//app.use('/editor/:eId/channel/:cId',editorRoutes)
+app.use('/editor',editorRoutes)
+app.use('/channel',channelRoutes)
+app.use('/filter',filterRouters)
 
 // Starting the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
