@@ -7,7 +7,7 @@ const Login = () => {
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
 
-	const history = useNavigate()
+	let navigate = useNavigate()
 
 	const handleChange = ({ currentTarget: input }) => {
 		setData({ ...data, [input.name]: input.value });
@@ -19,7 +19,13 @@ const Login = () => {
 			const url = "/api/auth/login";
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.accessToken);
-			history('/feed')
+			if (res.role === "user"){
+				window.location = '/'
+			}
+			else if (res.role === "editor"){
+				window.location = '/editor'
+			}
+
 		} catch (error) {
 			if (
 				error.response &&

@@ -2,9 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactTimeAgo from 'react-time-ago';
 import JavascriptTimeAgo from 'javascript-time-ago';
 import fi from 'javascript-time-ago/locale/fi';
-import { firstLetter } from '../../helpers/string';
 import ImageIcon from '@material-ui/icons/Image';
-import { MIN_IMAGE_WIDTH } from '../../constants/constants';
 import PropTypes from 'prop-types';
 import {
 	Card,
@@ -20,6 +18,12 @@ import styles from './FeedItem.module.css';
 JavascriptTimeAgo.addLocale(fi);
 
 const FeedItem = ({ data, options }) => {
+	const MIN_IMAGE_WIDTH = 250
+	const firstLetter = (s) => {
+		if (typeof s !== 'string') return '';
+		return s.charAt(0).toUpperCase();
+	};
+
 	const { image, source, title, isoDate, favicon, link } = data;
 	const [maxHeight, setMaxHeight] = useState(null);
 	const [hasLoaded, setHasLoaded] = useState(false);
