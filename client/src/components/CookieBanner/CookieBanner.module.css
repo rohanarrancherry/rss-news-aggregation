@@ -1,0 +1,24 @@
+.root {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-width: fit-content;
+    z-index: 1100;
+    padding: 1rem;
+    margin: 0.625rem;
+    display: flex;
+    align-items: center;
+}
+
+.root > * {
+    color: #EFEFEF !important;
+}
+
+.icon {
+    margin: 0 1rem 0 0;
+}
+
+.typography {
+    margin-right: 2rem !important;
+}
+

@@ -1,0 +1,15 @@
+.branding {
+	display: flex;
+	height: 100%;
+	align-items: center;
+	transition: opacity 0.2s ease;
+	position: relative;
+}
+
+.appTitle {
+	font-family: 'Museo700', monospace !important;
+}
+
+.thin {
+	font-family: 'Museo300', monospace !important;
+}

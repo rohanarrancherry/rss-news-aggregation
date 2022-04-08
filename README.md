@@ -1,70 +1,84 @@
-# Getting Started with Create React App
+# API Authentication using NodeJs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an Authentication API using JWT's that you can plug inside your current project or you can start with a new one. Email & Password is used for authentication.
 
-## Available Scripts
+The API based on Node.js, Express, MongoDB & Redis, following the **MVC pattern** i.e. Model ~~View~~ Controller.
 
-In the project directory, you can run:
+**Mongoose** is used for storing Users in Database.
+**Redis** is used for storing Refresh Tokens - to validate them as well at the same time Blacklisting them.
 
-### `npm start`
+The application is **production ready**.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## To start setting up the project
 
-### `npm test`
+Step 1: Clone the repo
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/trulymittal/API-Authentication-NodeJs.git
+```
 
-### `npm run build`
+Step 2: cd into the cloned repo and run:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Step 3: Put your credentials in the .env file.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017
+DB_NAME=YOUR_DB_NAME
+ACCESS_TOKEN_SECRET=GENERATE_FROM_GENERATE_KEYS_FILE_IN_HELPER
+REFRESH_TOKEN_SECRET=GENERATE_FROM_GENERATE_KEYS_FILE_IN_HELPER
+```
 
-### `npm run eject`
+Step 4: To generate 256-bit keys for JWT
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+node ./helpers/generate_keys.js
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Step 5: Install Redis (Linux Ubuntu)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+sudo apt-get install redis-server
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Step 6: Run Redis Server (Linux Ubuntu)
 
-## Learn More
+```bash
+redis-server
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Step 7: Install MongoDB (Linux Ubuntu)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+See <https://docs.mongodb.com/manual/installation/> for more infos
 
-### Code Splitting
+Step 8: Run Mongo daemon
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+sudo service mongod start
+```
 
-### Analyzing the Bundle Size
+Step 9: Start the API by
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm start
+```
 
-### Making a Progressive Web App
+Step 10 (Optional): Change the expiration time of Access Token and Refresh Token according to your needs by going inside the **`./helpers/jwt_helper.js`** file.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Author
 
-### Advanced Configuration
+- [**Truly Mittal**](https://trulymittal.com)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Contribute
 
-### Deployment
+You can fork this repo and send me a PR.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## License
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.

@@ -1,0 +1,22 @@
+.root {
+	margin-top: 8vh;
+	display: flex;
+	justify-content: center;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 60px 0;
+	height: 100%;
+}
+
+.title {
+	padding-bottom: 5px;
+}
+
+.button {
+	margin-top: 40px !important;
+}

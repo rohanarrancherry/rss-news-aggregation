@@ -1,0 +1,16 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 10px 0 10px;
+}
+
+.wrapper {
+	padding: 25px 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
