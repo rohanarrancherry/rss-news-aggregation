@@ -15,7 +15,7 @@ function App() {
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
-          <Route path="/editor" element={<Navigate replace to="/login" />} />
+          <Route path="/editor" element={<Navigate replace to="/editor" />} />
 
 
       </Routes>
