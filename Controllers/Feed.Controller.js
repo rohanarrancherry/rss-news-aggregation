@@ -49,7 +49,6 @@ exports.getDefaultCategory = async (req, res, next) => {
 
 
 exports.getByCategory = async (req, res, next) => {
-    console.log("Get Category reached")
     if (!req.headers['authorization']) return next(createError.Unauthorized())
     const authHeader = req.headers['authorization']
     const bearerToken = authHeader.split(' ')
@@ -57,7 +56,6 @@ exports.getByCategory = async (req, res, next) => {
     const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
 
     const currentUser = await User.findById(payload.aud)
-    console.log(currentUser)
     const { options } = req;
     const { category } = req.params;
 

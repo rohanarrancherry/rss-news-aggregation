@@ -1,4 +1,4 @@
-import JsonData from './tablelist.json';
+import JsonData from './testTablelist.json';
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
