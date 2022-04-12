@@ -3,6 +3,7 @@ import Main from "./components/Main";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Editor from "./components/Editor";
+import Buttons from "./components/Buttons/add_channel";
 
 
 function App() {
@@ -14,8 +15,10 @@ function App() {
         {user &&  <Route path="/editor" exact element={<Editor />} />}
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
+        <Route path="/button" exact element={<Buttons />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
           <Route path="/editor" element={<Navigate replace to="/editor" />} />
+      
 
 
       </Routes>
