@@ -1,5 +1,6 @@
 const createError = require('http-errors')
 const User = require('../Models/User.model')
+const Channel = require('../Models/channel.model')
 const { authSchema } = require('../helpers/validation_schema')
 const {
   signAccessToken,
@@ -7,6 +8,7 @@ const {
   verifyRefreshToken,
 } = require('../helpers/jwt_helper')
 const client = require('../helpers/init_redis')
+const { home } = require('nodemon/lib/utils')
 
 module.exports = {
   register: async (req, res, next) => {
@@ -50,6 +52,30 @@ module.exports = {
     } catch (error) {
       if (error.isJoi === true)
         return next(createError.BadRequest('Invalid Username/Password'))
+      next(error)
+    }
+  },
+
+  addChannel: async (req, res, next) => {
+    try {
+      // const { email, password } = req.body
+      // if (!email || !password) throw createError.BadRequest()
+      console.log(req.body);
+      // const result = await authSchema.validateAsync(req.body)
+      const result = req.body
+      if (!result.source_url || !result.source || !result.home || !result.category) throw createError.BadRequest()
+      const doesExist = await Channel.findOne({$or: [{'source_url': result.source_url}, {'source': result.source}, {'home': result.home}, {'category': result.category}]})
+      if (doesExist)
+        throw createError.Conflict(`Channel is already registered`)
+      console.log("does Exist", doesExist)
+      const channel = new Channel(result)
+      const new_channel = await channel.save()
+      const accessToken = await signAccessToken(new_channel.source_url, new_channel.source, new_channel.home, new_channel.category)
+      const refreshToken = await signRefreshToken(new_channel.source_url, new_channel.source, new_channel.home, new_channel.category)
+      console.log("Document created")
+      res.send({ accessToken, refreshToken })
+    } catch (error) {
+      if (error.isJoi === true) error.status = 422
       next(error)
     }
   },

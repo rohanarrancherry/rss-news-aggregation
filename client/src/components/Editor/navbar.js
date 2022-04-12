@@ -7,11 +7,17 @@ import { FormControl } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {useNavigate} from 'react-router-dom';
+
+
 function Navigation() {
+    const navigate = useNavigate();
     const handleLogout = () => {
         localStorage.removeItem("token");
         window.location.reload();
     };
+
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
     <Container>
@@ -29,9 +35,9 @@ function Navigation() {
       </Form>
       <Nav>
         <NavDropdown title="Account" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+          <NavDropdown.Item onClick={() => navigate('/')}>Profile</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="#"  onClick={handleLogout}>Logout</NavDropdown.Item>
+          <NavDropdown.Item onClick={() => navigate('/login')}>Logout</NavDropdown.Item>
         </NavDropdown>
       </Nav>
     </Navbar.Collapse>

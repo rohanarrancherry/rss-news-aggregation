@@ -8,6 +8,8 @@ router.post('/login', AuthController.login)
 
 router.post('/refresh-token', AuthController.refreshToken)
 
+router.post('/add_channel', AuthController.addChannel)
+
 router.delete('/logout', AuthController.logout)
 
 module.exports = router
