@@ -11,8 +11,8 @@ const Main = () => {
         <div>
                     <Navigation />
                     <Routes>
-                        <Route path="/" element={<EditorUi />} />
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/editor/dashboard" element={<EditorUi />} />
+                        <Route path="/editor/profile" element={<Profile />} />
                     </Routes>
         </div>
                
