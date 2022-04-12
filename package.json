@@ -21,6 +21,9 @@
     "mongoose-ttl": "^0.0.3",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
-    "redis": "^3.0.2"
+    "probe-image-size": "^7.2.3",
+    "react-bootstrap": "^2.2.3",
+    "redis": "^3.0.2",
+    "rss-parser": "^3.12.0"
   }
 }

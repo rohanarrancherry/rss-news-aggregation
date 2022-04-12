@@ -22,7 +22,7 @@ app.get('/', verifyAccessToken, async (req, res, next) => {
 app.use('/api/auth', AuthRoute)
 app.use('/api/feeds', FeedRoute)
 app.use('/api/user', UserRoute)
-
+app.use('/api/channel', AuthRoute)
 app.use(async (req, res, next) => {
   next(createError.NotFound())
 })
