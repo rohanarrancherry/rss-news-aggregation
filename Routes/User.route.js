@@ -7,9 +7,9 @@ const {getEditorChannelList} = userController
 const {updateChannelDetails} = userController
 
 router.get('/categories', getUserCategories);
-router.post('/editor/addchannel', addChanneltoEditorList);
-router.get('/editor/channellist', getEditorChannelList);
-router.patch('/editor/channel', updateChannelDetails);
+router.post('/addchannel', addChanneltoEditorList);
+router.get('/channellist', getEditorChannelList);
+router.patch('/channel', updateChannelDetails);
 
 
 module.exports = router;

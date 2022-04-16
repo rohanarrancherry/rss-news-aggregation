@@ -44,7 +44,7 @@ exports.getEditorChannelList = async(req,res) =>{
     
     try{
         const editorChannelList = await EditorChannelList.find() 
-    resp.status(200).json(editorChannelList)
+    res.status(200).json(editorChannelList)
     }
     catch(err){
         console.log(err);
@@ -56,10 +56,10 @@ exports.getEditorChannelList = async(req,res) =>{
 
 exports.updateChannelDetails = async(req,res)=> {
     try{
-        const editorChannelList = await EditorChannelList.findById(req.body.id) 
+        const editorChannelList = await EditorChannelList.findOneAndUpdate(req.body.id, {"enable":req.body.enable}) 
         editorChannelList.enable = req.body.enable
-        const updateData = await editorChannelList.save()
-        resp.status(200).json(updateData)   
+        //const updateData = await editorChannelList.findById(req.body.id)
+        res.status(200).json(editorChannelList) ;
     }catch(err){
         console.log(err);
         res.status(500).json({
@@ -71,7 +71,7 @@ exports.updateChannelDetails = async(req,res)=> {
 exports.DeleteChannel = async(req,res)=> {
     try{
         const editorChannelList = await EditorChannelList.findByIdAndDelete(req.params.id) 
-        resp.status(200).json(editorChannelList)   
+        res.status(200).json(editorChannelList)   
     }catch(err){
         console.log(err);
         res.status(500).json({
