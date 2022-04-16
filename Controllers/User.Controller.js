@@ -28,34 +28,55 @@ exports.addChanneltoEditorList = async (req, res) => {
     })
     try{
         const ecl = await editorChannelList.save()
-        res.json(ecl)
+        res.status(200).json(ecl)
     }
     catch(err){
-        res.send('Error')
+        console.log(err);
+        res.status(500).json({
+            message: err,
+        });
     }
     
 };
 //get channel list for an editor
-exports.getEditorChannelList = async(req,resp) =>{
+exports.getEditorChannelList = async(req,res) =>{
     console.log('post');
     
     try{
-        const editorChannelList = await EditorChannelList.find({editorId:req.params.eId}) 
-    resp.json(editorChannelList)
+        const editorChannelList = await EditorChannelList.find() 
+    resp.status(200).json(editorChannelList)
     }
     catch(err){
-        resp.send('Error :'+err)
+        console.log(err);
+        res.status(500).json({
+            message: err,
+        });
     }
 };
 
-exports.updateChannelDetails = async(req,resp)=> {
+exports.updateChannelDetails = async(req,res)=> {
     try{
-        const editorChannelList = await EditorChannelList.find({editorId:req.params.eId, name:req.body.name }) 
+        const editorChannelList = await EditorChannelList.findById(req.body.id) 
         editorChannelList.enable = req.body.enable
         const updateData = await editorChannelList.save()
-        resp.json(updateData)   
+        resp.status(200).json(updateData)   
     }catch(err){
-        resp.send('Error')
+        console.log(err);
+        res.status(500).json({
+            message: err,
+        });
+    }
+
+};
+exports.DeleteChannel = async(req,res)=> {
+    try{
+        const editorChannelList = await EditorChannelList.findByIdAndDelete(req.params.id) 
+        resp.status(200).json(editorChannelList)   
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: err,
+        });
     }
 
 };

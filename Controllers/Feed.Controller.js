@@ -91,3 +91,15 @@ exports.getByKeyword = async (req, res) => {
         });
     }
 };
+
+
+exports.getMasterData = async(req,resp) => 
+{
+    try{
+        const channelList= await ChannelDetails.find()
+        resp.json(channelList)
+    }
+    catch(err){
+        resp.send('Error '+err)
+    }
+}

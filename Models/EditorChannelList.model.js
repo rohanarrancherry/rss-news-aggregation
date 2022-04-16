@@ -3,10 +3,6 @@ const mongoose = require('mongoose')
 const User = require('./User.model')
 const editorChannelListSchema = new mongoose.Schema({
 
-    editorId:{
-        type:ObjectId, ref: User     
-    }
-    ,
     name:{
         type:String,
         required:true

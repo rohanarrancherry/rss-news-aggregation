@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const feedController = require('../Controllers/Feed.Controller');
-const { getOptions, getByCategory, getDefaultCategory, getByKeyword } = feedController;
+const { getOptions, getByCategory, getDefaultCategory, getByKeyword,getMasterData } = feedController;
 
 router.get('/', getOptions, getDefaultCategory);
 router.get('/:category', getOptions, getByCategory);
 router.get('/search/:keyword', getOptions, getByKeyword);
+router.get('/masterdata', getMasterData);
 
 module.exports = router;
