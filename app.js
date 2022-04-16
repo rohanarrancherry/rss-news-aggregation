@@ -4,7 +4,7 @@ const createError = require('http-errors')
 require('dotenv').config()
 require('./helpers/init_mongodb')
 const { verifyAccessToken } = require('./helpers/jwt_helper')
-require('./helpers/init_redis')
+// require('./helpers/init_redis')
 
 const AuthRoute = require('./Routes/Auth.route')
 const FeedRoute  = require('./Routes/Feed.route')
@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
   })
 })
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 9000
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)

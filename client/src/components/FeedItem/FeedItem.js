@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactTimeAgo from 'react-time-ago';
 import JavascriptTimeAgo from 'javascript-time-ago';
-import fi from 'javascript-time-ago/locale/fi';
+import en from 'javascript-time-ago/locale/en';
 import ImageIcon from '@material-ui/icons/Image';
 import PropTypes from 'prop-types';
 import {
@@ -15,7 +15,7 @@ import {
 } from '@material-ui/core';
 import styles from './FeedItem.module.css';
 
-JavascriptTimeAgo.addLocale(fi);
+JavascriptTimeAgo.addLocale(en);
 
 const FeedItem = ({ data, options }) => {
 	const MIN_IMAGE_WIDTH = 250
@@ -56,7 +56,7 @@ const FeedItem = ({ data, options }) => {
 								className={styles.media}
 								image={image.url}
 								title={source}
-								alt='Uutiskuva'
+								alt='News Image'
 								onLoad={handleImageLoad}
 							/>
 						</Fade>
@@ -76,7 +76,7 @@ const FeedItem = ({ data, options }) => {
 					</Typography>
 					<div className={styles.wrapper}>
 						<div className={styles.source}>
-							<Avatar variant='rounded' alt='Lähteen logo' src={favicon} className={styles.avatar}>
+							<Avatar variant='rounded' alt='Channel Logo' src={favicon} className={styles.avatar}>
 								{firstLetter(source) || '?'}
 							</Avatar>
 							<Typography variant='subtitle2' color='textSecondary' className={styles.details}>
@@ -86,7 +86,7 @@ const FeedItem = ({ data, options }) => {
 						<div className={styles.date}>
 							<Typography variant='subtitle2' color='textSecondary' className={styles.details}>
 								<span style={{ margin: '5px' }}>-</span>
-								<ReactTimeAgo date={new Date(isoDate)} locale='fi' timeStyle='twitter' />
+								<ReactTimeAgo date={new Date(isoDate)} locale='en' timeStyle='twitter' />
 							</Typography>
 						</div>
 					</div>

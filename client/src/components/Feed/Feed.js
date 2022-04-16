@@ -6,13 +6,13 @@ import FeedItem from '../FeedItem/FeedItem';
 import Error from "../Error/Error";
 import PropTypes from 'prop-types';
 import styles from './Feeds.module.css';
+import {Spinner} from "react-bootstrap";
 
 const Feed = ({ data = [], fetchMore, hasMore, hasError, isLoading }) => {
 	const options = {
 		isDark: true,
 		layout: "grid"
 	}
-	console.log(data)
 	const columnGutter = options.layout === 'list' ? 10 : 15;
 	const columnWidth = options.layout === 'list' ? 500 : 240;
 	const FeedItemWithProps = useCallback(
@@ -29,17 +29,11 @@ const Feed = ({ data = [], fetchMore, hasMore, hasError, isLoading }) => {
 			style={{ padding: '10px 10px 150px 10px' }}
 			loader={
 				<div className={styles.loader}>
-					<CircularProgress
-						color='primary'
-						size={26}
-						thickness={4}
-						style={{ display: isLoading ? 'none' : 'block' }}
-					/>
+					<Spinner animation="border" role="status">
+						<span className="visually-hidden">Loading...</span>
+					</Spinner>
 				</div>
 			}>
-			<Backdrop className={styles.backdrop} open={isLoading}>
-				<CircularProgress color='primary' size={26} thickness={4} aria-label='progressbar' />
-			</Backdrop>
 			{hasError && <Error />}
 			{data?.length > 1 && (
 				<Masonic
