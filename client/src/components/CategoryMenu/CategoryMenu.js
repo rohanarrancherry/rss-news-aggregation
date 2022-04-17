@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 // import PropTypes from 'prop-types';
 import {Tabs, Tab} from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
-
+import { Navbar, Nav } from 'react-bootstrap';
+import { Row, Container } from "reactstrap";
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-
 const useTabStyles = makeStyles({
     root: {
         justifyContent: "center"
@@ -38,23 +38,37 @@ const CategoryMenu = () => {
     const classes = useTabStyles();
 
     return (
-        <Tabs
-            classes={{root: classes.root, scroller: classes.scroller}}
-            value={active}
-            onChange={(event, newValue) => {
-                console.log(newValue);
-                setActive(newValue);
-                navigate(`/dashboard/${newValue}`)
-            }}
-            indicatorColor="primary"
-            textColor="primary"
-            variant={"scrollable"}
-            scrollButtons={"on"}
-        >
-            {cat.map((category, index) => (
-                <Tab key={index} label={category} value={category}/>
-            ))}
-        </Tabs>
+            
+            <>
+            <Navbar bg="dark" variant="dark">
+                <Container>
+                <Nav className='m-auto'>
+                    {cat.map((catg, index)=> (<Nav.Link href={`/dashboard/${catg}`}>{catg.toUpperCase()}</Nav.Link>))}
+
+                </Nav>
+                </Container>
+            </Navbar>
+            </> 
+
+        // <Tabs
+        //     classes={{root: classes.root, scroller: classes.scroller}}
+        //     value={active}
+        //     onChange={(event, newValue) => {
+        //         console.log(newValue);
+        //         setActive(newValue);
+                
+        //     }}
+        //     indicatorColor="primary"
+        //     textColor="primary"
+        //     variant={"scrollable"}
+        //     scrollButtons={"on"}
+        // >
+        //     {cat.map((category, index) => (
+        //         <Tab key={index}  onClick={()=>{navigate(`/dashboard/${category}`)}} label={category} value={category}/>
+        //     ))}
+        // </Tabs>
+
+        
     );
 };
 
