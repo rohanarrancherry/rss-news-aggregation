@@ -24,8 +24,8 @@ module.exports = {
       const user = new User(result)
       const savedUser = await user.save()
       const accessToken = await signAccessToken(savedUser.id, savedUser.email, savedUser.role)
-      const refreshToken = await signRefreshToken(savedUser.id, savedUser.email, savedUser.role)
-      res.send({ accessToken, refreshToken })
+      // const refreshToken = await signRefreshToken(savedUser.id, savedUser.email, savedUser.role)
+      res.send({ accessToken })
     } catch (error) {
       if (error.isJoi === true) error.status = 422
       next(error)
@@ -44,9 +44,9 @@ module.exports = {
         throw createError.Unauthorized('Username/password not valid')
 
       const accessToken = await signAccessToken(user.id, user.email, user.role)
-      const refreshToken = await signRefreshToken(user.id, user.email, user.role)
+      // const refreshToken = await signRefreshToken(user.id, user.email, user.role)
 
-      res.send({ accessToken, refreshToken, "role": user.role })
+      res.send({ accessToken, "role": user.role })
     } catch (error) {
       if (error.isJoi === true)
         return next(createError.BadRequest('Invalid Username/Password'))
@@ -61,8 +61,8 @@ module.exports = {
       const userId = await verifyRefreshToken(refreshToken)
 
       const accessToken = await signAccessToken(userId)
-      const refToken = await signRefreshToken(userId)
-      res.send({ accessToken: accessToken, refreshToken: refToken })
+      // const refToken = await signRefreshToken(userId)
+      res.send({ accessToken: accessToken})
     } catch (error) {
       next(error)
     }

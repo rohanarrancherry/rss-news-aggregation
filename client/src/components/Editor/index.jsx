@@ -9,11 +9,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 const Main = () => {
     return (
         <div>
-                    <Navigation />
-                    <Routes>
-                        <Route path="/editor/dashboard" element={<EditorUi />} />
-                        <Route path="/editor/profile" element={<Profile />} />
-                    </Routes>
+                    {/*<Navigation />*/}
+                    {/*<Routes>*/}
+                    {/*    */}
+                    {/*</Routes>*/}
         </div>
                
             
