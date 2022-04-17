@@ -18,12 +18,12 @@ const UserSchema = new Schema({
     required: true,
     default: 'user'
   },
-  newsCategories: [
+  newsCategories:
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'newsCategories'
-    }
-  ],
+      type: Array,
+      required: true,
+      default: ['latest']
+    },
 })
 
 UserSchema.pre('save', async function (next) {

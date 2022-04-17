@@ -13,13 +13,19 @@ function App() {
 
   return (
       <Routes>
-        {user && <Route path="/" exact element={<Main />} />}
-        {user &&  <Route path="/editor" exact element={<Editor />} />}
+        {/*{user && <Route path="/" exact element={<Main />} />}*/}
+          {user && <Route path="/dashboard/:categoryParam" element={<Main/>} />}
+
+          {user &&  <Route path="/editor/dashboard" exact element={<Editor />} />}
+          {user && <Route path="/editor/profile" element={<Profile/>}/>}
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />
+        
+
           <Route path="/editor/dashboard" element={<EditorUi />} />
           <Route path="/editor/profile" element={<Profile />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/*" element={<Navigate replace to="/login" />} />
           {/*<Route path="/editor" element={<Navigate replace to="/editor" />} />*/}
 
 
