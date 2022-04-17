@@ -5,26 +5,18 @@ import './styles.module.css';
 import EditorUi from './editor';
 import Profile from './profile';
 import Navigation from './navbar';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
 const Main = () => {
     return (
         <div>
-                    <Navigation />
-                    <Routes>
-                        <Route path="/editor/dashboard" element={<EditorUi />} />
-                        <Route path="/editor/profile" element={<Profile />} />
-                    </Routes>
+
+                    {/*<Navigation />*/}
+                    {/*<Routes>*/}
+                    {/*    */}
+                    {/*</Routes>*/}
         </div>
-               
-            
-    
     );
 };
 
 export default Main;
-/*
-                <h1>Editor Page</h1>
-
-                <button className={styles.white_btn} onClick={handleLogout}>
-                    Logout
-                </button>*/

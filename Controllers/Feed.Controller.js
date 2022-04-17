@@ -28,9 +28,7 @@ exports.getDefaultCategory = async (req, res, next) => {
     const authHeader = req.headers['authorization']
     const bearerToken = authHeader.split(' ')
     const token = bearerToken[1]
-    console.log("Before jwt")
     const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-    console.log(payload)
 
     const currentUser = await User.findById(payload.aud)
     const { options } = req;
