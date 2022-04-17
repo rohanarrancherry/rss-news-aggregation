@@ -32,7 +32,25 @@ function TableUI(){
         }
       }
     }
-      useEffect(() => {
+     
+    const edit = async(id, value) =>{
+      console.log(value)
+      try {
+        const url = "/api/editor/channel/";
+        const { data: res } = await axios.patch(url,{id:id, enable:value})
+        //fetchPostList()
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          //setError(error.response.data.message);
+        }
+      }
+    }
+
+    useEffect(() => {
 		const fetchPostList = async() =>{
             const {data} = await axios("/api/editor/channellist")
             setPosts({JsonData:data})
@@ -51,7 +69,7 @@ const DisplayData=posts.JsonData.map(
                 <td><Button variant="outline-secondary" onClick={handleDeleteShow(info._id)} > Delete</Button></td>
                 <td>
                     <Form>
-                     <Form.Check type="switch" id="custom-switch" />
+                     <Form.Check type="switch" id="custom-switch" value={info.enable} onChange={edit(info._id,info.enable)}/>
                      </Form>
                 </td>
             </tr>
