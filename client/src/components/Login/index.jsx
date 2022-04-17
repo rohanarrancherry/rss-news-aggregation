@@ -23,7 +23,7 @@ const Login = () => {
 				window.location = '/dashboard/latest'
 			}
 			else if (res.role === "editor"){
-				window.location = '/editor'
+				navigate('/editor/dashboard')
 			}
 
 		} catch (error) {

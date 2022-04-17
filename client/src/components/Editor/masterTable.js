@@ -1,39 +1,51 @@
-import JsonData from '../PopUp/ChannelMasterData.json';
+//import JsonData from '../PopUp/ChannelMasterData.json';
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import { useState ,useEffect, useMemo} from "react";
+import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 function MasterTableUI(){
-    const DisplayData=JsonData.map(
-        (info)=>{
-            return(
-                <tr>
-                    <td>{info.name}</td>
-                    <td>{info.link}</td>
-                    <td>{info.tags}</td>                    
-                </tr>
-            );
+    const [loadingData, setLoadingData] = useState(true);
+    const columns = useMemo(() => [
+        {
+          Header: "Name",
+          accessor: "name",
+        },
+        {
+          Header: "Link",
+          accessor: "link",
+        },
+        {
+          Header: "Tags",
+          accessor: "tags",
+        },
+      ]);
+    const [data,setMasterData] =useState("");
+
+    useEffect(() => {
+        async function getData() {
+          await axios
+            .get("/api/editor/channellist")
+            .then((response) => {
+              // check if the data is populated
+              console.log(response.data);
+              setMasterData(response.data);
+              // you tell it that you had the result
+              setLoadingData(false);
+            });
         }
-    )
-    
+        if (loadingData) {
+          // if the result is not ready so you make the axios call
+          getData();
+        }
+      }, []);
+  
+
     return(
         <div>
-            <Table striped bordered hover>
-                <thead>
-                    <tr>
-                    <th>Name</th>
-                    <th>Link</th>
-                    <th>Tags</th>
-                    </tr>
-                </thead>
-                <tbody>
-                 
-                    
-                    {DisplayData}
-                    
-                </tbody>
-            </Table>
-             
+        
+            <Table columns={columns} data={data} />
         </div>
     );
     }

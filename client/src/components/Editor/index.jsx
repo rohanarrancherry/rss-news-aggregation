@@ -10,8 +10,11 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 const Main = () => {
     return (
         <div>
-                    <Navigation />
 
+                    {/*<Navigation />*/}
+                    {/*<Routes>*/}
+                    {/*    */}
+                    {/*</Routes>*/}
         </div>
     );
 };

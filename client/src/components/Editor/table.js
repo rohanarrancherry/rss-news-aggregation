@@ -1,26 +1,39 @@
-import JsonData from './testTablelist.json';
-import React,{useState} from 'react';
-import { Button, Table, Modal, Form } from 'react-bootstrap';
-
+//import JsonData from './tablelist.json';
+import React, { useState, state, useEffect } from 'react';
+import { Modal } from 'react-bootstrap';
+import axios from "axios";
+import { Table } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import { BsTrashFill } from 'react-icons/bs';
-//import DeletePopUp from '../PopUp/delete'
+import { Form } from 'react-bootstrap';
+//import DeletePopUp from './delete';
 function TableUI(){
     const [show, setShow] = useState(false);
-  
+    //const [data, setData] = useState({ _id: "62456c48f7c100063224b073", enable: "" });
+    const [posts, setPosts] = useState({JsonData:[] });
     const handleDeleteClose = () => setShow(false);
     const handleDeleteShow = () => setShow(true);
-const DisplayData=JsonData.map(
+      useEffect(() => {
+		const fetchPostList = async() =>{
+            const {data} = await axios("/api/editor/channellist")
+            setPosts({JsonData:data})
+            console.log(data)
+        }
+        fetchPostList()
+	},[setPosts])
+
+const DisplayData=posts.JsonData.map(
     (info)=>{
         return(
-            <tr>
+            <tr key={info._id}>
                 <td>{info.name}</td>
                 <td>{info.link}</td>
                 <td>{info.tags}</td>
-                <td><Button onClick={handleDeleteShow()} /> </td>
+                <td><Button variant="outline-secondary" onClick={handleDeleteShow} > Delete</Button></td>
                 <td>
                     <Form>
-                     <Form.Check type="switch" id="custom-switch"/>
+                     <Form.Check type="switch" id="custom-switch" />
                      </Form>
                 </td>
             </tr>
@@ -60,7 +73,7 @@ return(
               Cancel
             </Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> 
     </div>
 );
 }

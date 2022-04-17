@@ -1,4 +1,4 @@
-const redis = require('redis')
+/*const redis = require('redis')
 
 const client = redis.createClient({
   port: 6379,
@@ -26,3 +26,4 @@ process.on('SIGINT', () => {
 })
 
 module.exports = client
+*/
