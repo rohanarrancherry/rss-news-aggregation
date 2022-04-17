@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Button } from '@material-ui/core';
+import { Button } from 'react-bootstrap';
 import styles from './Error.module.css';
 
 const Error = () => {
@@ -10,12 +10,8 @@ const Error = () => {
 	return (
 		<div className={styles.root}>
 			<div className={styles.wrapper}>
-				<Typography variant='h4' className={styles.title}>
 					Something went wrong!
-				</Typography>
-				<Typography variant='subtitle2' color='secondary'>
 					This is a temporary error, please try again soon.
-				</Typography>
 				<Button
 					onClick={handlePageRefresh}
 					variant='outlined'
