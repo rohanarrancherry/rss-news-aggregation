@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Masonry as Masonic } from 'masonic';
-import { CircularProgress, Backdrop } from '@material-ui/core';
 import FeedItem from '../FeedItem/FeedItem';
 import Error from "../Error/Error";
 import PropTypes from 'prop-types';

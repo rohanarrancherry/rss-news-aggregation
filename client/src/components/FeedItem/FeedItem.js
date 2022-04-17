@@ -2,17 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import ReactTimeAgo from 'react-time-ago';
 import JavascriptTimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
-import ImageIcon from '@material-ui/icons/Image';
 import PropTypes from 'prop-types';
-import {
-	Card,
-	CardActionArea,
-	CardMedia,
-	CardContent,
-	Typography,
-	Avatar,
-	Fade,
-} from '@material-ui/core';
+import { Card } from 'react-bootstrap';
+
 import styles from './FeedItem.module.css';
 
 JavascriptTimeAgo.addLocale(en);
@@ -46,52 +38,36 @@ const FeedItem = ({ data, options }) => {
 	}, [options]);
 
 	return (
-		<Card elevation={1} onClick={() => window.open(link, '_blank', 'noopener noreferrer')}>
-			<CardActionArea className={options.layout === 'list' ? styles.list : null} disableRipple>
+		<Card className={styles.zoom}   elevation={1} onClick={() => window.open(link, '_blank', 'noopener noreferrer')}>
 				{image.url && image.width >= MIN_IMAGE_WIDTH && (
 					<div className={styles.container} style={{ height: `${maxHeight}px` }}>
-						<Fade timeout={500} in={hasLoaded}>
-							<CardMedia
+							<Card.Img
 								component='img'
 								className={styles.media}
-								image={image.url}
+								src={image.url}
 								title={source}
 								alt='News Image'
 								onLoad={handleImageLoad}
 							/>
-						</Fade>
 						<div className={styles.placeholder}>
-							<ImageIcon color='primary' />
 						</div>
 					</div>
 				)}
-				<CardContent className={styles.content} ref={contentEl}>
-					<Typography
-						gutterBottom
-						variant='subtitle2'
-						color='textPrimary'
-						component='h6'
-						className={styles.title}>
+				<Card.Body className={styles.content} ref={contentEl}>
 						{title}
-					</Typography>
 					<div className={styles.wrapper}>
 						<div className={styles.source}>
-							<Avatar variant='rounded' alt='Channel Logo' src={favicon} className={styles.avatar}>
+							{/* <Image variant='rounded' alt='Channel Logo' src={favicon} className={styles.avatar}>
 								{firstLetter(source) || '?'}
-							</Avatar>
-							<Typography variant='subtitle2' color='textSecondary' className={styles.details}>
+							</Image> */}
 								{source}
-							</Typography>
 						</div>
 						<div className={styles.date}>
-							<Typography variant='subtitle2' color='textSecondary' className={styles.details}>
 								<span style={{ margin: '5px' }}>-</span>
 								<ReactTimeAgo date={new Date(isoDate)} locale='en' timeStyle='twitter' />
-							</Typography>
 						</div>
 					</div>
-				</CardContent>
-			</CardActionArea>
+				</Card.Body>
 		</Card>
 	);
 };
