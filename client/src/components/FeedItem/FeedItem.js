@@ -38,7 +38,7 @@ const FeedItem = ({ data, options }) => {
 	}, [options]);
 
 	return (
-		<Card elevation={1} onClick={() => window.open(link, '_blank', 'noopener noreferrer')}>
+		<Card className={styles.zoom}   elevation={1} onClick={() => window.open(link, '_blank', 'noopener noreferrer')}>
 				{image.url && image.width >= MIN_IMAGE_WIDTH && (
 					<div className={styles.container} style={{ height: `${maxHeight}px` }}>
 							<Card.Img
