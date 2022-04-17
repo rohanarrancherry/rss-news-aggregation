@@ -68,7 +68,7 @@ exports.updateChannelDetails = async(req,res)=> {
     }
 
 };
-exports.DeleteChannel = async(req,res)=> {
+exports.deleteChannel = async(req,res)=> {
     try{
         const editorChannelList = await EditorChannelList.findByIdAndDelete(req.params.id) 
         res.status(200).json(editorChannelList)   

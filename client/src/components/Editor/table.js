@@ -1,5 +1,5 @@
 //import JsonData from './tablelist.json';
-import React, { useState, state, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from "axios";
 import { Table } from 'react-bootstrap';
@@ -10,10 +10,28 @@ import { Form } from 'react-bootstrap';
 //import DeletePopUp from './delete';
 function TableUI(){
     const [show, setShow] = useState(false);
-    //const [data, setData] = useState({ _id: "62456c48f7c100063224b073", enable: "" });
+    const [id, setId] = useState("");
     const [posts, setPosts] = useState({JsonData:[] });
     const handleDeleteClose = () => setShow(false);
-    const handleDeleteShow = () => setShow(true);
+    const handleDeleteShow = (id) => {
+      setShow(true)
+      setId(id)
+    };
+    const confirmDelete = async() =>{
+      try {
+        const url = "/api/editor/channel/";
+        const { data: res } = await axios.delete(url,{params:{id:id}})
+        //fetchPostList()
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          //setError(error.response.data.message);
+        }
+      }
+    }
       useEffect(() => {
 		const fetchPostList = async() =>{
             const {data} = await axios("/api/editor/channellist")
@@ -30,7 +48,7 @@ const DisplayData=posts.JsonData.map(
                 <td>{info.name}</td>
                 <td>{info.link}</td>
                 <td>{info.tags}</td>
-                <td><Button variant="outline-secondary" onClick={handleDeleteShow} > Delete</Button></td>
+                <td><Button variant="outline-secondary" onClick={handleDeleteShow(info._id)} > Delete</Button></td>
                 <td>
                     <Form>
                      <Form.Check type="switch" id="custom-switch" />
@@ -66,7 +84,7 @@ return(
           </Modal.Header>
           <Modal.Body>Please confirm to delete.</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleDeleteClose}>
+            <Button variant="secondary" onClick={confirmDelete }>
               Confirm
             </Button>
             <Button variant="primary" onClick={handleDeleteClose}>
