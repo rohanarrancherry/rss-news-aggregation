@@ -21,7 +21,6 @@ exports.getUserCategories = async (req, res) => {
 // add channel for an editor
 exports.addChanneltoEditorList = async (req, res) => {
     const editorChannelList = new EditorChannelList({
-        editorId:req.params.eId,
         name: req.body.name,
         tags:req.body.tags,
         link: req.body.link,
