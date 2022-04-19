@@ -70,7 +70,7 @@ exports.getMasterData = async(req,resp) =>{
 
 exports.updateChannelDetails = async(req,res)=> {
     try{
-        const editorChannelList = await EditorChannelList.findOneAndUpdate(req.body.id, {"enable":req.body.enable}) 
+        const editorChannelList = await EditorChannelList.updateOne({_id:req.body.id}, {enable:req.body.enable}) 
         editorChannelList.enable = req.body.enable
         //const updateData = await editorChannelList.findById(req.body.id)
         res.status(200).json(editorChannelList) ;
@@ -84,7 +84,8 @@ exports.updateChannelDetails = async(req,res)=> {
 };
 exports.deleteChannel = async(req,res)=> {
     try{
-        const editorChannelList = await EditorChannelList.findByIdAndDelete(req.params.id) 
+        console.log(req.params.id)
+        const editorChannelList = await EditorChannelList.deleteOne({_id:req.params.id}) 
         res.status(200).json(editorChannelList)   
     }catch(err){
         console.log(err);

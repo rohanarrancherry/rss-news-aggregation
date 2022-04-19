@@ -31,7 +31,8 @@ const Main = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("token");
-        window.location.reload();
+        localStorage.removeItem("role");
+        window.location = '/';
     };
 
 
@@ -47,7 +48,6 @@ const Main = () => {
             if (feedData.message) return; // request has been cancelled
             if (feedData.docs.length < 1) throw new Error('Data fetch failed.');
             
-            console.log('`feed data', feedData)
             setNews({
                 data: feedData.docs,
                 nextPage: page < pages ? page + 1 : page,

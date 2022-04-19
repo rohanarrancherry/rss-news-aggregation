@@ -19,8 +19,8 @@ function TableUI(){
     };
     const confirmDelete = async() =>{
       try {
-        const url = "/api/editor/channel/";
-        const { data: res } = await axios.delete(url,{params:{id:id}})
+        const url = "/api/editor/channel/"+id;
+        const { data: res } = await axios.delete(url)
         //fetchPostList()
       } catch (error) {
         if (
@@ -31,12 +31,13 @@ function TableUI(){
           //setError(error.response.data.message);
         }
       }
+      handleDeleteClose();
     }
      
     const edit = async(id, value) =>{
       console.log(value)
       try {
-        const url = "/api/editor/channel/";
+        const url = "/api/editor/channel";
         const { data: res } = await axios.patch(url,{id:id, enable:value})
         //fetchPostList()
       } catch (error) {
@@ -66,10 +67,10 @@ const DisplayData=posts.JsonData.map(
                 <td>{info.name}</td>
                 <td>{info.link}</td>
                 <td>{info.tags}</td>
-                <td><Button variant="outline-secondary" onClick={handleDeleteShow(info._id)} > Delete</Button></td>
+                <td><Button variant="outline-secondary" onClick={() => handleDeleteShow(info._id)} > Delete</Button></td>
                 <td>
                     <Form>
-                     <Form.Check type="switch" id="custom-switch" />
+                     <Form.Check type="switch" id="custom-switch" checked={info.enable}  onChange={()=>edit(info._id,!info.enable)}/>
                      </Form>
                 </td>
             </tr>
@@ -79,7 +80,7 @@ const DisplayData=posts.JsonData.map(
 
 return(
     <div>
-        <Table striped bordered hover>
+        <Table striped bordered hover >
             <thead>
                 <tr>
                 <th>Name</th>

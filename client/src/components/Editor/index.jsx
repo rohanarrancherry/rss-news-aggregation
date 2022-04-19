@@ -7,17 +7,18 @@ import Profile from './profile';
 import Navigation from './navbar';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
-const Main = () => {
+const EditorMain = () => {
     return (
         <div>
-
-<Navigation />
-                    <Routes>
-                        <Route path="/editor/dashboard" element={<EditorUi />} />
-                        <Route path="/editor/profile" element={<Profile />} />
-                    </Routes>
+<Router>
+            <Navigation />
+            <Routes>
+                <Route path="/editor/dashboard" element={<EditorUi />} />
+                <Route path="/editor/profile" element={<Profile />} />
+            </Routes>
+</Router>
         </div>
     );
 };
 
-export default Main;
+export default EditorMain;
