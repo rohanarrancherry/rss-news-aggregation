@@ -66,7 +66,7 @@ const DisplayData=posts.JsonData.map(
                 <td>{info.name}</td>
                 <td>{info.link}</td>
                 <td>{info.tags}</td>
-                <td><Button variant="outline-secondary"  > Delete</Button></td>
+                <td><Button variant="outline-secondary" onClick={handleDeleteShow(info._id)} > Delete</Button></td>
                 <td>
                     <Form>
                      <Form.Check type="switch" id="custom-switch" />
@@ -102,7 +102,7 @@ return(
           </Modal.Header>
           <Modal.Body>Please confirm to delete.</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleDeleteClose }>
+            <Button variant="secondary" onClick={confirmDelete }>
               Confirm
             </Button>
             <Button variant="primary" onClick={handleDeleteClose}>
