@@ -20,9 +20,9 @@ function MasterTableUI({onSelect}){
       (info)=>{
           return(
               <tr key={info._id} onClick={() => onSelect(info)}>
-                  <td>{info.name}</td>
-                  <td>{info.link}</td>
-                  <td>{info.tags}</td>
+                  <td>{info.source}</td>
+                  <td>{info.url}</td>
+                  <td>{info.category}</td>
               </tr>
           );
       }

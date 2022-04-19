@@ -7,7 +7,7 @@ import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./navbar";
 function ChannelList(props) {
-  const [postData, setData] = useState({ name: "", link: "" ,tags:"", enable:true});
+  const [postData, setData] = useState({ source: "", url: "" ,category:"", enable:true});
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [show, setShow] = useState(false);
   const handleChange = (e) => {
@@ -38,7 +38,7 @@ function ChannelList(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => {setShow(true)
-    setData({ name: "", link: "" ,tags:"", enable:true})
+    setData({ source: "", url: "" ,category:"", enable:true})
   };
   return (
     <>
@@ -69,9 +69,9 @@ function ChannelList(props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-          <Form.Control size="sm" type="text" placeholder="Channel Name" name="name" onChange={handleChange}	value={postData.name}/>
-          <Form.Control size="sm" type="text" placeholder="Channel Link" name="link" onChange={handleChange}	value={postData.link} />
-          <Form.Control size="sm" type="text" placeholder="Tag" name="tags" onChange={handleChange}	value={postData.tags}/>
+          <Form.Control size="sm" type="text" placeholder="Channel Name" name="source" onChange={handleChange}	value={postData.name}/>
+          <Form.Control size="sm" type="text" placeholder="Channel Link" name="url" onChange={handleChange}	value={postData.link} />
+          <Form.Control size="sm" type="text" placeholder="Tag" name="category" onChange={handleChange}	value={postData.tags}/>
           <Form.Check enabled type="switch" id="custom-switch" label="Enable"  name="enable" onChange={handleChange}	value={postData.enable} />
           </Form>
         </Modal.Body>

@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import { BsTrashFill } from 'react-icons/bs';
 import { Form } from 'react-bootstrap';
+//import { post } from '../../../../Routes/Auth.route';
 //import DeletePopUp from './delete';
 function TableUI(){
     const [show, setShow] = useState(false);
@@ -64,9 +65,9 @@ const DisplayData=posts.JsonData.map(
     (info)=>{
         return(
             <tr key={info._id}>
-                <td>{info.name}</td>
-                <td>{info.link}</td>
-                <td>{info.tags}</td>
+                <td>{info.source}</td>
+                <td>{info.url}</td>
+                <td>{info.category}</td>
                 <td><Button variant="outline-secondary" onClick={() => handleDeleteShow(info._id)} > Delete</Button></td>
                 <td>
                     <Form>

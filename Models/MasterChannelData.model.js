@@ -1,16 +1,16 @@
-const { ObjectId } = require('mongodb')
+
 const mongoose = require('mongoose')
 const MasterChannelDataSchema = new mongoose.Schema({
 
-    name:{
+    source:{
         type:String,
         required:true
     },
-    tags:{
+    category:{
         type:String,
         required:true
     },
-    link:{
+    url:{
         type:String,
         required:true
     }
