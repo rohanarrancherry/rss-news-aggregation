@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 
 import styles from './FeedItem.module.css';
+import axios from "axios";
 
 JavascriptTimeAgo.addLocale(en);
 
@@ -38,7 +39,19 @@ const FeedItem = ({ data, options }) => {
 	}, [options]);
 
 	return (
-		<Card className={styles.zoom}   elevation={1} onClick={() => window.open(link, '_blank', 'noopener noreferrer')}>
+		<Card className={styles.zoom}   elevation={1} onClick={
+			async () => {
+				window.open(link, '_blank', 'noopener noreferrer')
+				const url = "/api/feeds/log";
+				let data = {
+					"token": localStorage.getItem("token"),
+					"timestamp": new Date().toLocaleString(),
+					"newsLink": link,
+					"source": source
+				}
+				const {data: res} = await axios.post(url, data);
+			}
+		}>
 				{image.url && image.width >= MIN_IMAGE_WIDTH && (
 					<div className={styles.container} style={{ height: `${maxHeight}px` }}>
 							<Card.Img

@@ -2,6 +2,7 @@ const Feed = require('../Models/Feed.model');
 const createError = require("http-errors");
 const {verifyAccessToken} = require("../helpers/jwt_helper");
 const User = require('../Models/User.model');
+const FeedLog = require('../Models/Log.model');
 const jwt = require("jsonwebtoken");
 const defaultPage = 1;
 const defaultLimit = 30;
@@ -120,4 +121,19 @@ exports.addMasterData = async(req,resp) =>
     catch(err){
         resp.send('Error '+err)
     }
+};
+
+exports.addUserFeedLog = async(req, resp) =>
+{
+    let log = req.body
+    const payload = jwt.verify(log.token, process.env.ACCESS_TOKEN_SECRET)
+
+    const newLog = new FeedLog({
+        user: payload.email,
+        source: log.source,
+        timestamp: log.timestamp,
+        newsLink: log.newsLink
+    })
+    const res = await newLog.save()
+    resp.status(200).json({"msg": "success"})
 };
