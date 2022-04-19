@@ -5,6 +5,7 @@ import TableUI from './table';
 import MasterTableUI from './masterTable'
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navigation from "./navbar";
 function ChannelList(props) {
   const [postData, setData] = useState({ name: "", link: "" ,tags:"", enable:true});
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -91,7 +92,9 @@ function ChannelList(props) {
 function EditorUi(){
   const [modalShow, setModalShow] = React.useState(false);
   return (
+
     <div>
+      <Navigation/>
     <div>
       <div class="container" style={{display: "flex", justifyContent: "space-between", margin:"2%"}}>
       <h2 style={{display: "inline"}}>LIST OF RSS FEEDs</h2>

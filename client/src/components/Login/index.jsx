@@ -19,11 +19,12 @@ const Login = () => {
 			const url = "/api/auth/login";
 			const { data: res } = await axios.post(url, data);
 			localStorage.setItem("token", res.accessToken);
+			localStorage.setItem("role", res.role)
 			if (res.role === "user"){
 				window.location = '/dashboard/latest'
 			}
 			else if (res.role === "editor"){
-				navigate('/editor/dashboard')
+				window.location = '/editor/dashboard'
 			}
 
 		} catch (error) {
