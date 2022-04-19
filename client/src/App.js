@@ -6,16 +6,18 @@ import Editor from "./components/Editor";
 import EditorUi from "./components/Editor/editor";
 import Profile from "./components/Editor/profile";
 import React from "react";
+import Navigation from "./components/Editor/navbar";
 
 
 function App() {
   const user = localStorage.getItem("token");
 
   return (
+    <>
+    {true && <Navigation/>}
       <Routes>
         {/*{user && <Route path="/" exact element={<Main />} />}*/}
           {user && <Route path="/dashboard/:categoryParam" element={<Main/>} />}
-
           {user &&  <Route path="/editor/dashboard" exact element={<EditorUi />} />}
           {user && <Route path="/editor/profile" element={<Profile/>}/>}
         <Route path="/signup" exact element={<Signup />} />
@@ -30,6 +32,7 @@ function App() {
 
 
       </Routes>
+      </>
   );
 }
 

@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import TableUI from './table';
 import MasterTableUI from './masterTable'
 import axios from "axios";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 function ChannelList(props) {
   const [postData, setData] = useState({ name: "", link: "" ,tags:"", enable:true});
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -12,7 +12,12 @@ function ChannelList(props) {
   const handleChange = (e) => {
 		setData({ ...postData, [e.target.name]: e.target.value });
 	};
+  const rowSelect = (row) =>{
+    setButtonDisabled(false)
+    setData({ ...postData, ...row });
+  }
   const addNewChannel = async() =>{
+    props.onHide();
     console.log(postData)
     try {
       const url = "/api/editor/addchannel";
@@ -27,6 +32,7 @@ function ChannelList(props) {
         //setError(error.response.data.message);
       }
     }
+
   }
 
   const handleClose = () => setShow(false);
@@ -48,11 +54,11 @@ function ChannelList(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-          <MasterTableUI />
+          <MasterTableUI onSelect={rowSelect} />
       </Modal.Body>
       <Modal.Footer>
         <Button style={{float: 'left'}} variant="outline-dark" onClick={props.onHide}>Cancel</Button>
-        <Button style={{float: 'left'}} disabled={buttonDisabled} variant="outline-primary" onClick={props.onHide}>Ok</Button>
+        <Button style={{float: 'left'}} disabled={buttonDisabled} variant="outline-primary" onClick={() =>{ addNewChannel(); }}>Ok</Button>
         <Button style={{float: 'right'}} variant="outline-success" onClick={() => { props.onHide(); handleShow();}}>Add New</Button>
       </Modal.Footer>
     </Modal>
@@ -108,7 +114,7 @@ function EditorUi(){
     </div>
     <div>
       <div class="container">
-      <TableUI></TableUI>
+      <TableUI ></TableUI>
       </div>
 
     </div>
