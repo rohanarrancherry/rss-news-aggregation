@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Masonry as Masonic } from 'masonic';
 import FeedItem from '../FeedItem/FeedItem';
@@ -6,8 +6,17 @@ import Error from "../Error/Error";
 import PropTypes from 'prop-types';
 import styles from './Feeds.module.css';
 import {Spinner} from "react-bootstrap";
+import { v4 as uuidv4 } from 'uuid';
 
 const Feed = ({ data = [], fetchMore, hasMore, hasError, isLoading }) => {
+
+	// const [key, setKey] = useState(uuidv4())
+	let key = uuidv4()
+
+	useEffect(()=>{
+		// setKey(uuidv4())
+		key = uuidv4()
+	}, [data])
 	const options = {
 		isDark: true,
 		layout: "grid"
@@ -18,7 +27,7 @@ const Feed = ({ data = [], fetchMore, hasMore, hasError, isLoading }) => {
 		(props) => <FeedItem {...props} options={options} />,
 		[options]
 	);
-
+	
 	return (
 		<InfiniteScroll
 			dataLength={data.length}
@@ -36,6 +45,7 @@ const Feed = ({ data = [], fetchMore, hasMore, hasError, isLoading }) => {
 			{hasError && <Error />}
 			{data?.length > 1 && (
 				<Masonic
+				key= {key}
 					role='list'
 					className={styles.masonry}
 					items={data}
