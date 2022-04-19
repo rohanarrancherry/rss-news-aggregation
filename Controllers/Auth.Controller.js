@@ -6,6 +6,7 @@ const {
   signRefreshToken,
   verifyRefreshToken,
 } = require('../helpers/jwt_helper')
+const jwt = require("jsonwebtoken");
 // const client = require('../helpers/init_redis')
 
 module.exports = {
@@ -82,6 +83,19 @@ module.exports = {
       })
     } catch (error) {
       next(error)
+    }
+  },
+
+  role: async (req, res) => {
+    try {
+      const authHeader = req.headers['authorization']
+      const bearerToken = authHeader.split(' ')
+      const token = bearerToken[1]
+      const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+      console.log(payload)
+      res.send({"role": payload.role})
+    } catch (error) {
+      res.send(error)
     }
   },
 }
