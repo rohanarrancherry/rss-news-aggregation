@@ -2,6 +2,7 @@ const {verifyAccessToken} = require("../helpers/jwt_helper")
 const User = require('../Models/User.model')
 const EditorChannelList = require('../Models/EditorChannelList.model')
 const MasterChannelData = require('../Models/MasterChannelData.model')
+const {job} = require("../updateFeeds");
 
 exports.getUserCategories = async (req, res) => {
     try{
@@ -87,6 +88,25 @@ exports.deleteChannel = async(req,res)=> {
         console.log(req.params.id)
         const editorChannelList = await EditorChannelList.deleteOne({_id:req.params.id}) 
         res.status(200).json(editorChannelList)   
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: err,
+        });
+    }
+};
+
+exports.updateUserFeed = async(req,res)=> {
+    try{
+        const channels = await EditorChannelList.find()
+        console.log(channels.length)
+        const filteredChannels = channels.filter(channel => channel.enable === true);
+        console.log(filteredChannels.length)
+        const result = await job(filteredChannels)
+        res.status(200).json({
+            message: result,
+        });
+
     }catch(err){
         console.log(err);
         res.status(500).json({
