@@ -1,0 +1,25 @@
+.loader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 200px;
+	margin-bottom: 71px;
+}
+
+.backdrop {
+	z-index: 100;
+}
+
+.masonry {
+	outline: none;
+	animation: fade-in 0.2s cubic-bezier(1,.01,.27,.26) both;
+}
+
+@keyframes fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

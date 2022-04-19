@@ -1,0 +1,22 @@
+[
+    {
+        "_id": "62456c48f7c100063224b073",
+        "editorId": "62438c0c52f9fbf56a62495e",
+        "channelId": "6244d3f06930e32b3e8b84bc",
+        "name": "Donegal Daily",
+        "tags": "Science",
+        "link": "https://www.donegaldaily.com/",
+        "enable": true,
+        "__v": 0
+    },
+    {
+        "_id": "62456dd46a3824089bbe121e",
+        "editorId": "62438c0c52f9fbf56a62495e",
+        "channelId": "624462957cf7a90612022069",
+        "name": "CNN.com",
+        "tags": "World",
+        "link": "http://rss.cnn.com/rss/cnn_topstories.rss",
+        "enable": true,
+        "__v": 0
+    }
+]

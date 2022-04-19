@@ -1,0 +1,37 @@
+[
+    {
+        "_id": "624462957cf7a90612022069",
+        "name": "CNN.com",
+        "tags": "World",
+        "link": "http://rss.cnn.com/rss/cnn_topstories.rss",
+        "__v": 0
+    },
+    {
+        "_id": "62447b1bc30edf7833ea6849",
+        "name": "The42 RSS FEED",
+        "tags": "Sports",
+        "link": "https://www.the42.ie/",
+        "__v": 0
+    },
+    {
+        "_id": "62447b60c30edf7833ea684b",
+        "name": "NPR Topics: Education",
+        "tags": "Education News",
+        "link": "http://www.npr.org/rss/rss.php?id=1013",
+        "__v": 0
+    },
+    {
+        "_id": "6244d3526930e32b3e8b84ba",
+        "name": "NASA Image of the Day",
+        "tags": "Science",
+        "link": "https://www.nasa.gov/rss/dyn/lg_image_of_the_day.rss",
+        "__v": 0
+    },
+    {
+        "_id": "6244d3f06930e32b3e8b84bc",
+        "name": "Donegal Daily",
+        "tags": "Science",
+        "link": "https://www.donegaldaily.com/",
+        "__v": 0
+    }
+]
