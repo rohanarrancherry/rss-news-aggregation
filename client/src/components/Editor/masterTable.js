@@ -26,7 +26,7 @@ function MasterTableUI(){
     useEffect(() => {
         async function getData() {
           await axios
-            .get("/api/editor/channellist")
+            .get("/api/editor/masterdata")
             .then((response) => {
               // check if the data is populated
               console.log(response.data);

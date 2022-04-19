@@ -58,7 +58,7 @@ function ChannelList(props) {
     </Modal>
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add New Channel</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>

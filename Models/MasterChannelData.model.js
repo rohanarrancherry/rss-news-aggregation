@@ -1,6 +1,5 @@
 const { ObjectId } = require('mongodb')
 const mongoose = require('mongoose')
-const User = require('./User.model')
 const MasterChannelDataSchema = new mongoose.Schema({
 
     name:{

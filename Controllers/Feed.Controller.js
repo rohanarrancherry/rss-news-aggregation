@@ -5,7 +5,7 @@ const User = require('../Models/User.model');
 const jwt = require("jsonwebtoken");
 const defaultPage = 1;
 const defaultLimit = 30;
-const MasterChannelData = require('../Models/ChannelMasterData.model')
+const MasterChannelData = require('../Models/MasterChannelData.model')
 exports.getOptions = (req, res, next) => {
     // do user validation here
     // find the user from token get users categories
@@ -91,13 +91,33 @@ exports.getByKeyword = async (req, res) => {
 };
 
 
-exports.getMasterData = async(req,resp) => 
-{
+exports.getMasterData = async(req,resp) =>{
+    console.log('get')
     try{
         const channelList= await MasterChannelData.find()
-        resp.json(channelList)
+        resp.status(200).json(channelList)
+    }
+    catch(err){
+        console.log(err);
+        resp.status(500).json({
+            message: err,
+        });
+    }
+};
+
+exports.addMasterData = async(req,resp) => 
+{
+    try{
+        const channelList= await MasterChannelData(
+        {
+            name: req.body.name,
+            tags:req.body.tags,
+            link: req.body.link,
+        })
+        const mcl = await channelList.save()
+        resp.status(200).json(mcl)
     }
     catch(err){
         resp.send('Error '+err)
     }
-}
+};

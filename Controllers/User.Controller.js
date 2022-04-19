@@ -1,7 +1,7 @@
 const {verifyAccessToken} = require("../helpers/jwt_helper")
 const User = require('../Models/User.model')
 const EditorChannelList = require('../Models/EditorChannelList.model')
-
+const MasterChannelData = require('../Models/MasterChannelData.model')
 
 exports.getUserCategories = async (req, res) => {
     try{
@@ -40,7 +40,7 @@ exports.addChanneltoEditorList = async (req, res) => {
 };
 //get channel list for an editor
 exports.getEditorChannelList = async(req,res) =>{
-    console.log('post');
+    //console.log('post');
     
     try{
         const editorChannelList = await EditorChannelList.find() 
@@ -49,6 +49,20 @@ exports.getEditorChannelList = async(req,res) =>{
     catch(err){
         console.log(err);
         res.status(500).json({
+            message: err,
+        });
+    }
+};
+
+exports.getMasterData = async(req,resp) =>{
+    console.log('get')
+    try{
+        const channelList= await MasterChannelData.find()
+        resp.status(200).json(channelList)
+    }
+    catch(err){
+        console.log(err);
+        resp.status(500).json({
             message: err,
         });
     }
