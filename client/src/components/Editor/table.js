@@ -52,7 +52,7 @@ function TableUI(){
 
     useEffect(() => {
 		const fetchPostList = async() =>{
-            const {data} = await axios("/api/editor/channellist")
+            const {data} = await axios.get("/api/editor/channellist")
             setPosts({JsonData:data})
             console.log(data)
         }
@@ -66,10 +66,10 @@ const DisplayData=posts.JsonData.map(
                 <td>{info.name}</td>
                 <td>{info.link}</td>
                 <td>{info.tags}</td>
-                <td><Button variant="outline-secondary" onClick={handleDeleteShow(info._id)} > Delete</Button></td>
+                <td><Button variant="outline-secondary"  > Delete</Button></td>
                 <td>
                     <Form>
-                     <Form.Check type="switch" id="custom-switch" value={info.enable} onChange={edit(info._id,info.enable)}/>
+                     <Form.Check type="switch" id="custom-switch" />
                      </Form>
                 </td>
             </tr>
@@ -102,7 +102,7 @@ return(
           </Modal.Header>
           <Modal.Body>Please confirm to delete.</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={confirmDelete }>
+            <Button variant="secondary" onClick={handleDeleteClose }>
               Confirm
             </Button>
             <Button variant="primary" onClick={handleDeleteClose}>

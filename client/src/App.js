@@ -16,7 +16,7 @@ function App() {
         {/*{user && <Route path="/" exact element={<Main />} />}*/}
           {user && <Route path="/dashboard/:categoryParam" element={<Main/>} />}
 
-          {user &&  <Route path="/editor/dashboard" exact element={<Editor />} />}
+          {user &&  <Route path="/editor/dashboard" exact element={<EditorUi />} />}
           {user && <Route path="/editor/profile" element={<Profile/>}/>}
         <Route path="/signup" exact element={<Signup />} />
         <Route path="/login" exact element={<Login />} />

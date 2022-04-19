@@ -11,10 +11,11 @@ const Main = () => {
     return (
         <div>
 
-                    {/*<Navigation />*/}
-                    {/*<Routes>*/}
-                    {/*    */}
-                    {/*</Routes>*/}
+<Navigation />
+                    <Routes>
+                        <Route path="/editor/dashboard" element={<EditorUi />} />
+                        <Route path="/editor/profile" element={<Profile />} />
+                    </Routes>
         </div>
     );
 };

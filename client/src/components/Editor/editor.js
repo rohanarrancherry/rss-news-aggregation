@@ -3,18 +3,19 @@ import { Button , Modal, Form} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TableUI from './table';
 import MasterTableUI from './masterTable'
+import axios from "axios";
 
 function ChannelList(props) {
   const [postData, setData] = useState({ name: "", link: "" ,tags:"", enable:true});
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [show, setShow] = useState(false);
   const handleChange = (e) => {
-		setData({ ...data, [e.target.name]: e.target.value });
+		setData({ ...postData, [e.target.name]: e.target.value });
 	};
   const addNewChannel = async() =>{
-    console.log(value)
+    console.log(postData)
     try {
-      const url = "/api/editor/channel/";
+      const url = "/api/editor/addchannel";
       const { data: res } = await axios.post(url,postData)
       //fetchPostList()
     } catch (error) {
@@ -61,10 +62,10 @@ function ChannelList(props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-          <Form.Control size="sm" type="text" placeholder="Channel Name" onChange={handleChange}	value={data.name}/>
-          <Form.Control size="sm" type="text" placeholder="Channel Link" onChange={handleChange}	value={data.link} />
-          <Form.Control size="sm" type="text" placeholder="Tag" onChange={handleChange}	value={data.tags}/>
-          <Form.Check enabled type="switch" id="custom-switch" label="Enable" onChange={handleChange}	value={data.enable} />
+          <Form.Control size="sm" type="text" placeholder="Channel Name" name="name" onChange={handleChange}	value={postData.name}/>
+          <Form.Control size="sm" type="text" placeholder="Channel Link" name="link" onChange={handleChange}	value={postData.link} />
+          <Form.Control size="sm" type="text" placeholder="Tag" name="tags" onChange={handleChange}	value={postData.tags}/>
+          <Form.Check enabled type="switch" id="custom-switch" label="Enable"  name="enable" onChange={handleChange}	value={postData.enable} />
           </Form>
         </Modal.Body>
         <Modal.Footer>
