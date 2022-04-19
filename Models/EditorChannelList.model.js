@@ -3,15 +3,15 @@ const mongoose = require('mongoose')
 const User = require('./User.model')
 const editorChannelListSchema = new mongoose.Schema({
 
-    name:{
+    source:{
         type:String,
         required:true
     },
-    tags:{
+    category:{
         type:String,
         required:true
     },
-    link:{
+    url:{
         type:String,
         required:true
     },
