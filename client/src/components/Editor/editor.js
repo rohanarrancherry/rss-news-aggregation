@@ -6,6 +6,7 @@ import MasterTableUI from './masterTable'
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./navbar";
+import LoadingButton from "../LoadingButton/LoadingButton";
 function ChannelList(props) {
   const [validated, setValidated] = useState(false);
   const [postData, setData] = useState({ source: "", url: "" ,category:"", enable:true});
@@ -115,7 +116,8 @@ function EditorUi(){
       <h2 style={{display: "inline"}}>LIST OF RSS FEEDs</h2>
   
       <Button style={{display: "inline"}} variant="secondary" size="sm" onClick={() => setModalShow(true)}>ADD Channel</Button>
-      <ChannelList
+      <LoadingButton />
+        <ChannelList
           show={modalShow}
           changeForceUI = {changeForceUI}
           onHide={() => setModalShow(false)}
