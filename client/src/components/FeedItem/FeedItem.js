@@ -70,9 +70,6 @@ const FeedItem = ({ data, options }) => {
 						{title}
 					<div className={styles.wrapper}>
 						<div className={styles.source}>
-							{/* <Image variant='rounded' alt='Channel Logo' src={favicon} className={styles.avatar}>
-								{firstLetter(source) || '?'}
-							</Image> */}
 								{source}
 						</div>
 						<div className={styles.date}>

@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import Feed from "../Feed/Feed";
 import { fetchData } from "../api/api";
@@ -8,22 +7,16 @@ import SearchBar from "../Search/search";
 import { useParams } from "react-router-dom";
 
 const Main = () => {
-    const [category, setCategory] = useState("latest")
     const { categoryParam } = useParams();
     const DEFAULT_PAGE = 1;
     const LIMIT = 30;
-
     const [error, setError] = useState("")
-    const [feeds, setFeeds] = useState(null)
-
     const [isLoading, setLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
     const [news, setNews] = useState({ data: [] });
     const [hasMore, setHasMore] = useState(true);
-
     const [searchTerm, setSearchTerm] = useState("")
     const [filteredResults, setFilteredResults] = useState({ data: [] })
-
 
     useEffect(() => {
         getCategory()
@@ -37,7 +30,6 @@ const Main = () => {
 
 
     const getCategory = async (e) => {
-        // e.preventDefault();
         try {
             const feedData = await fetchData('/' + categoryParam, DEFAULT_PAGE, LIMIT)
             const { page, pages } = feedData;
@@ -45,7 +37,7 @@ const Main = () => {
                 setHasMore(false);
             }
 
-            if (feedData.message) return; // request has been cancelled
+            if (feedData.message) return;
             if (feedData.docs.length < 1) throw new Error('Data fetch failed.');
             
             setNews({

@@ -1,5 +1,4 @@
 const probe = require('probe-image-size');
-// const feedSources = require('../sources/feedSources');
 const TIME_TO_LIVE = 60 * 60 * 24 * 2 * 1000;
 
 const parseFeed = async (feed, src) => {
@@ -9,16 +8,16 @@ const parseFeed = async (feed, src) => {
     if (!url) {
         return {
             ...feed,
-            image: { url },
+            image: {url},
             categories: parseCategories(feed, src)
         };
     }
 
-    const { width, height, wUnits } = details;
+    const {width, height, wUnits} = details;
 
     return {
         ...feed,
-        image: { url, width, height, unit: wUnits },
+        image: {url, width, height, unit: wUnits},
         categories: parseCategories(feed, src)
     };
 };
@@ -30,7 +29,7 @@ const getImageDetails = async url => {
 
 const filterOutNonUnique = arr => {
     const unique = [
-        ...new Set(arr.map(item => JSON.stringify({ home: item.home, source: item.source })))
+        ...new Set(arr.map(item => JSON.stringify({home: item.home, source: item.source})))
     ];
     return unique.map(item => JSON.parse(item));
 };
@@ -41,11 +40,9 @@ const parseImageUrl = feed => {
         return feed.image['$'].url;
     }
 
-    // mostly for YLE's stamp sized images which are resizable by altering the url
     if (feed.enclosure) {
         return (
             feed.enclosure.url
-                // width and the height are selected so that the aspect ratio remains correct
                 .replace('w_205', 'w_600')
                 .replace('h_115', 'h_337')
                 .replace('http:', 'https:')

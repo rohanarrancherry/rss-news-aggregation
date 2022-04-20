@@ -1,4 +1,3 @@
-//import JsonData from './tablelist.json';
 import React, { useState, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import axios from "axios";
@@ -22,15 +21,12 @@ function TableUI({value}){
       try {
         const url = "/api/editor/channel/"+id;
         const { data: res } = await axios.delete(url)
-        //fetchPostList()
       } catch (error) {
         if (
           error.response &&
           error.response.status >= 400 &&
           error.response.status <= 500
-        ) {
-          //setError(error.response.data.message);
-        }
+        ) {}
       }
       setData(true);
       handleDeleteClose();
@@ -41,15 +37,12 @@ function TableUI({value}){
       try {
         const url = "/api/editor/channel";
         const { data: res } = await axios.patch(url,{id:id, enable:value})
-        //fetchPostList()
       } catch (error) {
         if (
           error.response &&
           error.response.status >= 400 &&
           error.response.status <= 500
-        ) {
-          //setError(error.response.data.message);
-        }
+        ) {}
       }
     }
     const fetchTableDataList = async() =>{
