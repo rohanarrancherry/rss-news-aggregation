@@ -20,14 +20,7 @@ function Navigation() {
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
     <Form className="d-flex">
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-success">Search</Button>
-      </Form>
+    </Form>
       <Nav>
         <NavDropdown title="Account" id="basic-nav-dropdown">
           <NavDropdown.Item href="/editor/profile">Profile</NavDropdown.Item>
