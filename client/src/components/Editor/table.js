@@ -12,7 +12,7 @@ import { Form } from 'react-bootstrap';
 function TableUI(){
     const [show, setShow] = useState(false);
     const [id, setId] = useState("");
-    const [posts, setPosts] = useState({JsonData:[] });
+    const [tableData, setTableData] = useState([] );
     const handleDeleteClose = () => setShow(false);
     const handleDeleteShow = (id) => {
       setShow(true)
@@ -32,6 +32,7 @@ function TableUI(){
           //setError(error.response.data.message);
         }
       }
+      setData(true);
       handleDeleteClose();
     }
      
@@ -51,27 +52,28 @@ function TableUI(){
         }
       }
     }
-
+    const fetchTableDataList = async() =>{
+      const {data} = await axios.get("/api/editor/channellist")
+      setTableData(data)
+      setData(false)
+  }
+  const [data, setData] = useState(true)
     useEffect(() => {
-		const fetchPostList = async() =>{
-            const {data} = await axios.get("/api/editor/channellist")
-            setPosts({JsonData:data})
-            console.log(data)
-        }
-        fetchPostList()
-	},[setPosts])
+      if(data)
+      fetchTableDataList()
+	},[data ,tableData])
 
-const DisplayData=posts.JsonData.map(
+const DisplayData=tableData.map(
     (info)=>{
         return(
-            <tr key={info._id}>
+            <tr key={info._id} >
                 <td>{info.source}</td>
                 <td>{info.url}</td>
                 <td>{info.category}</td>
-                <td><Button variant="outline-secondary" onClick={() => handleDeleteShow(info._id)} > Delete</Button></td>
+                <td><Button variant="outline-secondary" onClick={() => { handleDeleteShow(info._id)}} > Delete</Button></td>
                 <td>
                     <Form>
-                     <Form.Check type="switch" id="custom-switch" checked={info.enable}  onChange={()=>edit(info._id,!info.enable)}/>
+                     <Form.Check type="switch" id="custom-switch" checked={info.enable}  onChange={()=>{setData(true); edit(info._id,!info.enable)}}/>
                      </Form>
                 </td>
             </tr>
