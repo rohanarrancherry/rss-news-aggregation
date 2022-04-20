@@ -5,12 +5,9 @@ import axios from "axios";
 import { Table } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import { BsTrashFill } from 'react-icons/bs';
 import { Form } from 'react-bootstrap';
 import SearchBar from '../Search/search';
-//import { post } from '../../../../Routes/Auth.route';
-//import DeletePopUp from './delete';
-function TableUI(){
+function TableUI({value}){
     const [searchTerm, setSearchTerm] = useState("");
     const [tableSearchData, setTableSearchData] = useState([]);  
     const [show, setShow] = useState(false);
@@ -62,10 +59,14 @@ function TableUI(){
       setData(false)
   }
   const [data, setData] = useState(true)
-    useEffect(() => {
+  useEffect(() => {
       if(data)
       fetchTableDataList()
-	},[data ,tableData])
+	},[data ,tableData, value])
+
+  useEffect(() => {
+    fetchTableDataList()
+},[value])
 
 const DisplayData=tableSearchData.map(
     (info)=>{
