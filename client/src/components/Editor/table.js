@@ -82,7 +82,7 @@ const DisplayData=tableSearchData.map(
 const searchTable = (value) => {
   setSearchTerm(value)
   const filteredSource = tableData.filter((single) => {
-      return (single.source?.toLowerCase().includes(value))
+      return (single.category?.toLowerCase().includes(value))
   })
   console.log(filteredSource)
 
