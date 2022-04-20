@@ -15,7 +15,6 @@ const SearchBar = ({searchNews}) => {
             name="s" 
             onChange={(event)=>{searchNews(event.target.value)}}
         />
-        <button type="submit">Search</button>
     </form>)
 };
 
