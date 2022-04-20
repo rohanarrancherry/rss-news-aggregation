@@ -1,11 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const userController = require('../Controllers/User.Controller');
-const {updateUserFeed} = require("../Controllers/User.Controller");
-const {getUserCategories} = userController
-const {addChanneltoEditorList} = userController
-const {getEditorChannelList, getMasterData} = userController
-const {updateChannelDetails, deleteChannel} = userController
+const {
+    updateUserFeed,
+    getUserCategories,
+    addChanneltoEditorList,
+    getEditorChannelList,
+    getMasterData,
+    updateChannelDetails,
+    deleteChannel
+
+} = require("../Controllers/User.Controller");
 
 router.get('/categories', getUserCategories);
 router.post('/addchannel', addChanneltoEditorList);

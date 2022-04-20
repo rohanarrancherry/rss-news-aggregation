@@ -1,4 +1,3 @@
-//import JsonData from '../PopUp/ChannelMasterData.json';
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import { useState ,useEffect, useMemo} from "react";

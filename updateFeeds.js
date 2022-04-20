@@ -1,4 +1,3 @@
-// const feedSources = require('./sources/feedSources');
 const Feed = require('./Models/Feed.model');
 const RSSparser = require('rss-parser');
 const mongoose = require('mongoose');
@@ -31,7 +30,7 @@ const parser = new RSSparser({
 exports.job = async (feedSources) => {
     console.log('Running on schedule..');
     console.log(feedSources.length)
-    try{
+    try {
         await Feed.deleteMany({}).then(
             async () => {
                 console.log("deleted")
@@ -54,7 +53,6 @@ exports.job = async (feedSources) => {
                                 }
                                 if (!feed) {
                                     await newFeed.save((err, data) => {
-                                        // if (err) console.log(err._message || err.MongoError || err);
                                         if (data) console.log(data._id, 'saved to database.');
                                     });
                                 }
@@ -67,9 +65,8 @@ exports.job = async (feedSources) => {
                     }
                 }
             })
-    return "success"
-    }
-    catch (err) {
+        return "success"
+    } catch (err) {
         // console.log(err);
         return err
     }
