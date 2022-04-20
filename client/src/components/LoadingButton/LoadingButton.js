@@ -1,11 +1,6 @@
 import {useEffect, useState} from "react";
 import {Button} from "reactstrap";
-import Feed from "../Feed/Feed";
 import axios from "axios";
-
-function simulateNetworkRequest() {
-    return new Promise((resolve) => setTimeout(resolve, 2000));
-}
 
 function LoadingButton() {
     const [isLoading, setLoading] = useState(false);

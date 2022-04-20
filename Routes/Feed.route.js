@@ -14,7 +14,6 @@ const {
 router.get('/', getOptions, getDefaultCategory);
 router.post('/log', addUserFeedLog);
 router.get('/:category', getOptions, getByCategory);
-router.get('/search/:keyword', getOptions, getByKeyword);
 router.get('/masterdata', getMasterData);
 router.post('/addmasterdata', addMasterData);
 
