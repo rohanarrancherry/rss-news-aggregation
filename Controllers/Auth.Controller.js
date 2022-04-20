@@ -48,7 +48,6 @@ module.exports = {
             const bearerToken = authHeader.split(' ')
             const token = bearerToken[1]
             const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
-            console.log(payload)
             res.send({"role": payload.role})
         } catch (error) {
             res.send(error)
