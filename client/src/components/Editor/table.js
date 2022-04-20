@@ -10,7 +10,7 @@ import { Form } from 'react-bootstrap';
 import SearchBar from '../Search/search';
 //import { post } from '../../../../Routes/Auth.route';
 //import DeletePopUp from './delete';
-function TableUI(){
+function TableUI({value}){
     const [searchTerm, setSearchTerm] = useState("");
     const [tableSearchData, setTableSearchData] = useState([]);  
     const [show, setShow] = useState(false);
@@ -63,9 +63,9 @@ function TableUI(){
   }
   const [data, setData] = useState(true)
     useEffect(() => {
-      if(data)
+
       fetchTableDataList()
-	},[data ,tableData])
+	},[data ,tableData, value])
 
 const DisplayData=tableSearchData.map(
     (info)=>{

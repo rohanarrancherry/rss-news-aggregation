@@ -31,7 +31,7 @@ function ChannelList(props) {
     try {
       const url = "/api/editor/addchannel";
       const { data: res } = await axios.post(url,postData)
-      //fetchPostList()
+      props.changeForceUI()
     } catch (error) {
       if (
         error.response &&
@@ -102,8 +102,12 @@ function ChannelList(props) {
 
 function EditorUi(){
   const [modalShow, setModalShow] = React.useState(false);
-  return (
-
+  const [value, setValue] = useState(1);
+  const changeForceUI = () =>{
+    console.log("called force")
+    setValue((value)=>value+1)
+  }
+  return (  
     <div>
       <Navigation/>
     <div>
@@ -113,6 +117,7 @@ function EditorUi(){
       <Button style={{display: "inline"}} variant="secondary" size="sm" onClick={() => setModalShow(true)}>ADD Channel</Button>
       <ChannelList
           show={modalShow}
+          changeForceUI = {changeForceUI}
           onHide={() => setModalShow(false)}
         />
       </div>
@@ -129,7 +134,7 @@ function EditorUi(){
     </div>
     <div>
       <div class="container">
-      <TableUI ></TableUI>
+      <TableUI value={value} />
       </div>
 
     </div>
