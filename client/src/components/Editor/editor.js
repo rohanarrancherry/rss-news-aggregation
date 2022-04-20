@@ -82,7 +82,7 @@ function ChannelList(props) {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" disabled={buttonDisabled} onClick={()=>{addNewChannel(); handleClose();}}>
+          <Button variant="primary" onClick={()=>{addNewChannel(); handleClose();}}>
             Add Channel
           </Button>
         </Modal.Footer>
