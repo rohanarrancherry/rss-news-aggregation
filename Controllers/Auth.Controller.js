@@ -6,19 +6,19 @@ const {
   signRefreshToken,
   verifyRefreshToken,
 } = require('../helpers/jwt_helper')
+const jwt = require("jsonwebtoken");
 // const client = require('../helpers/init_redis')
 
 module.exports = {
   register: async (req, res, next) => {
     try {
-      // const { email, password } = req.body
-      // if (!email || !password) throw createError.BadRequest()
-      // const result = await authSchema.validateAsync(req.body)
       const result = req.body
       if (!result.email || !result.password) throw createError.BadRequest()
       const doesExist = await User.findOne({ email: result.email })
       if (doesExist)
-        throw createError.Conflict(`${result.email} is already been registered`)
+        return res
+            .status(409)
+            .send({ message: "User with given email already Exist!" });
       console.log("does Exist", doesExist)
       const user = new User(result)
       const savedUser = await user.save()
@@ -26,30 +26,31 @@ module.exports = {
       // const refreshToken = await signRefreshToken(savedUser.id, savedUser.email, savedUser.role)
       res.send({ accessToken })
     } catch (error) {
-      if (error.isJoi === true) error.status = 422
-      next(error)
+      res.status(500).send({ message: "Internal Server Error" });
     }
   },
 
   login: async (req, res, next) => {
     try {
+      console.log("reched")
       const result = req.body
-      if (!result.email || !result.password) throw createError.BadRequest()
+
       const user = await User.findOne({ email: result.email })
-      if (!user) throw createError.NotFound('User not registered')
+      if (!user)
+        return res.status(401).send({ message: "Invalid Email or Password" });
 
       const isMatch = await user.isValidPassword(result.password)
       if (!isMatch)
-        throw createError.Unauthorized('Username/password not valid')
+        return res.status(401).send({ message: "Invalid Email or Password" });
 
       const accessToken = await signAccessToken(user.id, user.email, user.role)
       // const refreshToken = await signRefreshToken(user.id, user.email, user.role)
 
       res.send({ accessToken, "role": user.role })
     } catch (error) {
+      console.log(error)
       if (error.isJoi === true)
-        return next(createError.BadRequest('Invalid Username/Password'))
-      next(error)
+        return res.status(401).send({ message: "Invalid Email or Password" });
     }
   },
 
@@ -82,6 +83,19 @@ module.exports = {
       })
     } catch (error) {
       next(error)
+    }
+  },
+
+  role: async (req, res) => {
+    try {
+      const authHeader = req.headers['authorization']
+      const bearerToken = authHeader.split(' ')
+      const token = bearerToken[1]
+      const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+      console.log(payload)
+      res.send({"role": payload.role})
+    } catch (error) {
+      res.send(error)
     }
   },
 }

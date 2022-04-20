@@ -5,13 +5,14 @@ import axios from "axios";
 import { Table } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import { BsTrashFill } from 'react-icons/bs';
 import { Form } from 'react-bootstrap';
-//import DeletePopUp from './delete';
-function TableUI(){
+import SearchBar from '../Search/search';
+function TableUI({value}){
+    const [searchTerm, setSearchTerm] = useState("");
+    const [tableSearchData, setTableSearchData] = useState([]);  
     const [show, setShow] = useState(false);
     const [id, setId] = useState("");
-    const [posts, setPosts] = useState({JsonData:[] });
+    const [tableData, setTableData] = useState([] );
     const handleDeleteClose = () => setShow(false);
     const handleDeleteShow = (id) => {
       setShow(true)
@@ -19,8 +20,8 @@ function TableUI(){
     };
     const confirmDelete = async() =>{
       try {
-        const url = "/api/editor/channel/";
-        const { data: res } = await axios.delete(url,{params:{id:id}})
+        const url = "/api/editor/channel/"+id;
+        const { data: res } = await axios.delete(url)
         //fetchPostList()
       } catch (error) {
         if (
@@ -31,12 +32,14 @@ function TableUI(){
           //setError(error.response.data.message);
         }
       }
+      setData(true);
+      handleDeleteClose();
     }
      
     const edit = async(id, value) =>{
       console.log(value)
       try {
-        const url = "/api/editor/channel/";
+        const url = "/api/editor/channel";
         const { data: res } = await axios.patch(url,{id:id, enable:value})
         //fetchPostList()
       } catch (error) {
@@ -49,27 +52,33 @@ function TableUI(){
         }
       }
     }
+    const fetchTableDataList = async() =>{
+      const {data} = await axios.get("/api/editor/channellist")
+      setTableSearchData(data)
+      setTableData(data)
+      setData(false)
+  }
+  const [data, setData] = useState(true)
+  useEffect(() => {
+      if(data)
+      fetchTableDataList()
+	},[data ,tableData, value])
 
-    useEffect(() => {
-		const fetchPostList = async() =>{
-            const {data} = await axios.get("/api/editor/channellist")
-            setPosts({JsonData:data})
-            console.log(data)
-        }
-        fetchPostList()
-	},[setPosts])
+  useEffect(() => {
+    fetchTableDataList()
+},[value])
 
-const DisplayData=posts.JsonData.map(
+const DisplayData=tableSearchData.map(
     (info)=>{
         return(
-            <tr key={info._id}>
-                <td>{info.name}</td>
-                <td>{info.link}</td>
-                <td>{info.tags}</td>
-                <td><Button variant="outline-secondary" onClick={handleDeleteShow(info._id)} > Delete</Button></td>
+            <tr key={info._id} >
+                <td>{info.source}</td>
+                <td>{info.url}</td>
+                <td>{info.category}</td>
+                <td><Button variant="outline-secondary" onClick={() => { handleDeleteShow(info._id)}} > Delete</Button></td>
                 <td>
                     <Form>
-                     <Form.Check type="switch" id="custom-switch" />
+                     <Form.Check type="switch" id="custom-switch" checked={info.enable}  onChange={()=>{setData(true); edit(info._id,!info.enable)}}/>
                      </Form>
                 </td>
             </tr>
@@ -77,9 +86,20 @@ const DisplayData=posts.JsonData.map(
     }
 )
 
+const searchTable = (value) => {
+  setSearchTerm(value)
+  const filteredSource = tableData.filter((single) => {
+      return (single.source?.toLowerCase().includes(value))
+  })
+  console.log(filteredSource)
+
+  setTableSearchData(filteredSource)
+}
+
 return(
     <div>
-        <Table striped bordered hover>
+        <SearchBar searchNews={searchTable}/>
+        <Table striped bordered hover >
             <thead>
                 <tr>
                 <th>Name</th>

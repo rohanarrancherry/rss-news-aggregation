@@ -111,9 +111,9 @@ exports.addMasterData = async(req,resp) =>
     try{
         const channelList= await MasterChannelData(
         {
-            name: req.body.name,
-            tags:req.body.tags,
-            link: req.body.link,
+            source: req.body.source,
+            category:req.body.category,
+            url: req.body.url,
         })
         const mcl = await channelList.save()
         resp.status(200).json(mcl)

@@ -5,49 +5,47 @@ import { useState ,useEffect, useMemo} from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-function MasterTableUI(){
-    const [loadingData, setLoadingData] = useState(true);
-    const columns = useMemo(() => [
-        {
-          Header: "Name",
-          accessor: "name",
-        },
-        {
-          Header: "Link",
-          accessor: "link",
-        },
-        {
-          Header: "Tags",
-          accessor: "tags",
-        },
-      ]);
-    const [data,setMasterData] =useState("");
-
+function MasterTableUI({onSelect}){
+  const [posts, setPosts] = useState({JsonData:[] });
     useEffect(() => {
-        async function getData() {
-          await axios
-            .get("/api/editor/masterdata")
-            .then((response) => {
-              // check if the data is populated
-              console.log(response.data);
-              setMasterData(response.data);
-              // you tell it that you had the result
-              setLoadingData(false);
-            });
-        }
-        if (loadingData) {
-          // if the result is not ready so you make the axios call
-          getData();
-        }
-      }, []);
+      const fetchPostList = async() =>{
+              const {data} = await axios.get("/api/editor/masterdata")
+              setPosts({JsonData:data})
+              console.log(data)
+          }
+          fetchPostList()
+    },[setPosts])
   
-
-    return(
-        <div>
-        
-            <Table columns={columns} data={data} />
-        </div>
-    );
-    }
-
+  const DisplayData=posts.JsonData.map(
+      (info)=>{
+          return(
+              <tr key={info._id} onClick={() => onSelect(info)}>
+                  <td>{info.source}</td>
+                  <td>{info.url}</td>
+                  <td>{info.category}</td>
+              </tr>
+          );
+      }
+  )
+  
+  return(
+      <div>
+          <Table striped bordered hover>
+              <thead>
+                  <tr>
+                  <th>Name</th>
+                  <th>Link</th>
+                  <th>Tags</th>
+                  </tr>
+              </thead>
+              <tbody>
+               
+                  
+                  {DisplayData}
+                  
+              </tbody>
+          </Table>  
+      </div>
+  );
+  }
     export default MasterTableUI;

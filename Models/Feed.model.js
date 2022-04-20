@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const ttl = require('mongoose-ttl');
 // const validator = require('mongoose-unique-validator');
-const TIME_TO_LIVE = require('../helpers/constants');
+const TIME_TO_LIVE = 60 * 60 * 24 * 2 * 1000;
 
 const FeedSchema = mongoose.Schema({
     title: { type: String, required: true, unique: true },
@@ -14,7 +14,7 @@ const FeedSchema = mongoose.Schema({
     isoDate: { type: Date, required: true },
     source: { type: String, required: true },
     image: { url: String, width: Number, height: Number, unit: String },
-    favicon: { type: String, required: true }
+    favicon: { type: String, required: true, default: '/' }
 });
 
 FeedSchema.plugin(mongoosePaginate);

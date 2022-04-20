@@ -2,6 +2,7 @@ const {verifyAccessToken} = require("../helpers/jwt_helper")
 const User = require('../Models/User.model')
 const EditorChannelList = require('../Models/EditorChannelList.model')
 const MasterChannelData = require('../Models/MasterChannelData.model')
+const {job} = require("../updateFeeds");
 
 exports.getUserCategories = async (req, res) => {
     try{
@@ -21,9 +22,9 @@ exports.getUserCategories = async (req, res) => {
 // add channel for an editor
 exports.addChanneltoEditorList = async (req, res) => {
     const editorChannelList = new EditorChannelList({
-        name: req.body.name,
-        tags:req.body.tags,
-        link: req.body.link,
+        source: req.body.source,
+        category:req.body.category,
+        url: req.body.url,
         enable:req.body.enable
     })
     try{
@@ -70,7 +71,7 @@ exports.getMasterData = async(req,resp) =>{
 
 exports.updateChannelDetails = async(req,res)=> {
     try{
-        const editorChannelList = await EditorChannelList.findOneAndUpdate(req.body.id, {"enable":req.body.enable}) 
+        const editorChannelList = await EditorChannelList.updateOne({_id:req.body.id}, {enable:req.body.enable}) 
         editorChannelList.enable = req.body.enable
         //const updateData = await editorChannelList.findById(req.body.id)
         res.status(200).json(editorChannelList) ;
@@ -84,8 +85,28 @@ exports.updateChannelDetails = async(req,res)=> {
 };
 exports.deleteChannel = async(req,res)=> {
     try{
-        const editorChannelList = await EditorChannelList.findByIdAndDelete(req.params.id) 
+        console.log(req.params.id)
+        const editorChannelList = await EditorChannelList.deleteOne({_id:req.params.id}) 
         res.status(200).json(editorChannelList)   
+    }catch(err){
+        console.log(err);
+        res.status(500).json({
+            message: err,
+        });
+    }
+};
+
+exports.updateUserFeed = async(req,res)=> {
+    try{
+        const channels = await EditorChannelList.find()
+        console.log(channels.length)
+        const filteredChannels = channels.filter(channel => channel.enable === true);
+        console.log(filteredChannels.length)
+        const result = await job(filteredChannels)
+        res.status(200).json({
+            message: result,
+        });
+
     }catch(err){
         console.log(err);
         res.status(500).json({
