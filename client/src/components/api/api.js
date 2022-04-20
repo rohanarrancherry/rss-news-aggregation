@@ -9,11 +9,6 @@ export const fetchData = async (url, page, limit) => {
     url = url.replace('(', '').replace(')', '');
     console.log(url);
     const cachedData = checkStorage() && sessionStorage.getItem(url);
-
-    /*
-     * Cancel token is used to cancel ongoing fetch request,
-     * this is useful when category is changed before data has finished fetching
-     */
     if (cancelToken) {
         cancelToken.cancel('Operation canceled due to new request.');
     }

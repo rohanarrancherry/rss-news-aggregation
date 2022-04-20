@@ -1,4 +1,3 @@
-import { useState} from "react";
 import "../Main/styles.module.css";
 
 const SearchBar = ({searchNews}) => {

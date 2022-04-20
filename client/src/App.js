@@ -4,10 +4,9 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import EditorUi from "./components/Editor/editor";
 import Profile from "./components/Editor/profile";
-// import React, {useEffect, useState} from "react";
 
 function App() {
-    const userRole = localStorage.getItem("role")
+  const userRole = localStorage.getItem("role")
 
   return (
     <>
@@ -17,9 +16,7 @@ function App() {
           {(userRole === "editor") && <Route path="/editor/profile" element={<Profile/>}/>}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />
-           <Route path="/" element={<Navigate replace to="/login" />} />
-
-
+          <Route path="/" element={<Navigate replace to="/login" />} />
       </Routes>
       </>
   );

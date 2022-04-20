@@ -8,7 +8,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Navigation from "./navbar";
 import LoadingButton from "../LoadingButton/LoadingButton";
 function ChannelList(props) {
-  const [validated, setValidated] = useState(false);
   const [postData, setData] = useState({ source: "", url: "" ,category:"", enable:true});
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [show, setShow] = useState(false);
@@ -19,11 +18,6 @@ function ChannelList(props) {
   const rowSelect = (row) =>{
     setButtonDisabled(false)
     setData({ ...postData, ...row });
-  }
-  const validateForm = ()=>{
-    if(postData.source.trim==="" || postData.url.trim==="" || postData.category.trim==="" || !postData.enable ){
-
-    }
   }
   const addNewChannel = async() =>{
     
@@ -38,13 +32,10 @@ function ChannelList(props) {
         error.response &&
         error.response.status >= 400 &&
         error.response.status <= 500
-      ) {
-        //setError(error.response.data.message);
-      }
+      ) {}
     }
 
   }
-  const [isLoading, setLoading] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => {setShow(true)
     setButtonDisabled(true)

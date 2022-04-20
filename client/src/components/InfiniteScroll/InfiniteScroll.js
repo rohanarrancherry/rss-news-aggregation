@@ -11,21 +11,15 @@ class App extends React.Component {
     }
 
     async componentDidMount() {
-
-        // load more on page scroll using IntersectionObserver
         var options = {
             root: null,
             rootMargin: "20px",
             threshold: 1
         };
-
-        // create observer
         this.observer = new IntersectionObserver(
             this.handleObserver.bind(this),
             options
         );
-
-        // observe the `loadingRef`
         this.observer.observe(this.loadingRef);
     }
 
@@ -43,8 +37,6 @@ class App extends React.Component {
         if(resp.status >= 200 && resp.status < 300) {
             var json = await resp.json();
             const resources = json.results;
-
-            // append the new items and update state
             this.setState({loading: false, resources: [...this.state.resources, ...resources]});
         }
     }
@@ -54,10 +46,7 @@ class App extends React.Component {
         const top = entities[0].target.getBoundingClientRect().top;
 
         if (entities[0].intersectionRatio > 0) {
-            // append more data
             this.fetchData();
-
-            // in case loading element top is less than viewport height
             if (top < window.innerHeight && !this.state.loadedOnce) {
                 observer.unobserve(this.loadingRef);
                 observer.observe(this.loadingRef);
@@ -112,7 +101,6 @@ class App extends React.Component {
     }
 };
 
-// render
 ReactDOM.render(
     <App />,
     document.getElementById("app")

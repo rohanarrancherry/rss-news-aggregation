@@ -9,12 +9,9 @@ import {Spinner} from "react-bootstrap";
 import { v4 as uuidv4 } from 'uuid';
 
 const Feed = ({ data = [], fetchMore, hasMore, hasError, isLoading }) => {
-
-	// const [key, setKey] = useState(uuidv4())
 	let key = uuidv4()
 
 	useEffect(()=>{
-		// setKey(uuidv4())
 		key = uuidv4()
 	}, [data])
 	const options = {
